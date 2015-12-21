@@ -1,0 +1,59 @@
+Ready, Steady, Go!
+
+Paweł Slomka
+pslomka@pslomka.com
+Siili2
+
+* Environment setup
+
+Download and install Go (from https://golang.org/dl/):
+
+    tar -C /usr/local -xzf go$VERSION.$OS-$ARCH.tar.gz
+
+Three environmental variables:
+
+    $GOROOT -> /usr/local/go
+    $PATH   -> $GOROOT/bin:$PATH
+    $GOPATH -> /home/pslomka/go
+    $GOBIN  -> /home/pslomka/go/bin
+
+Task *#1*
+
+    go run tasks/workshop1/main.go
+    go get -u github.com/golang/lint/golint
+    go install github.com/slomek/go-workshops/tasks/workshop1
+
+Test your env:
+
+    $GOBIN/workshop1
+
+
+* Creating modules
+
+Main application file should be in `main` package.
+
+    package main
+    ...
+
+Package names are important, as they are used with all imported functions etc.
+
+    ...
+    import "fmt"
+    ...
+        fmt.Println("Hello Siilis!")
+
+Package names _should_ match directory names
+(You will save a lot of time!)
+
+* Importing between modules
+
+All imported stuff is referenced by `packagename.stuffname`:
+
+    fmt.Println()
+
+Note that you can only import things starting with a capital letter!
+
+Task *#2*
+
+    go test github.com/slomek/go-workshops/tasks/workshop2/fb
+
