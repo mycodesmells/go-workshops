@@ -1,14 +1,23 @@
 Ready, Steady, Go!
 
 Paweł Slomka
-pslomka@pslomka.com
-Siili2
+https://github.com/slomek/go-workshops
 
-* Environment setup
+* Before we start
 
 Download and install Go (from https://golang.org/dl/):
 
     tar -C /usr/local -xzf go$VERSION.$OS-$ARCH.tar.gz
+
+Clone workshop repository
+
+    git clone https://github.com/slomek/go-workshops
+
+* Hi y'all!
+
+.image go-workshops/gopher_600.png 600 _
+
+* Environment setup
 
 Three environmental variables:
 
@@ -17,15 +26,15 @@ Three environmental variables:
     $GOPATH -> /home/pslomka/go
     $GOBIN  -> /home/pslomka/go/bin
 
-Task *#1*
+*Task*#1*
 
     go run tasks/workshop1/main.go
     go get -u github.com/golang/lint/golint
-    go install github.com/slomek/go-workshops/tasks/workshop1
+    go install github.com/slomek/go-workshops/tasks/task1
 
 Test your env:
 
-    $GOBIN/workshop1
+    $GOBIN/task1
 
 
 * Creating modules
@@ -53,7 +62,163 @@ All imported stuff is referenced by `packagename.stuffname`:
 
 Note that you can only import things starting with a capital letter!
 
-Task *#2*
+*Task*#2*
 
-    go test github.com/slomek/go-workshops/tasks/workshop2/fb
+    go test github.com/slomek/go-workshops/tasks/task2/fb
 
+We want to see the number of friends we have.
+
+* Data structures - struct
+
+Struct's structure is constructed like this:
+
+    type Place struct {
+    	Name string
+    	FunnyName bool
+    }
+
+To create an instance:
+
+    Place{Name: "Brown Willy (UK)", FunnyName: false}
+
+or:
+
+    Place{"Ofakim (Israel)", true}
+
+*Task*#3*
+
+    go test github.com/slomek/go-workshops/tasks/task3/fb
+
+
+* Data structures - interfaces (1/2)
+
+No fields - just functions:
+
+    type RainDrop interface {
+        Fall()
+        DanceOnGlass(g Glass) err
+        TalkToFellowDrop(f RainDrop, msg string)
+    }
+
+Function implementation:
+
+    func (rd RainDrop) DanceOnGlass(g Glass) {
+        if g.Broken() {
+            return fmt.Error("cannot dance in these conditions!")
+        }
+        g.MakeWet()
+        fmt.Println("I've haaad the time of my liiiife!")
+    }
+
+* Data structures - interfaces (2/2)
+
+Important rule:
+
+_If_it_walks_like_a_duck_and_quacks_like_a_duck,_then_it_is_a_duck._
+
+*Task*#4*
+
+    go test github.com/slomek/go-workshops/tasks/task4/fb
+
+* Pointer, addresses, receivers (1/2)
+
+By default, everything is passed by value in Go.
+
+    func walkOnTable(t Table){}
+    ...
+    walkOnTable(tbl)
+
+To change it you need a pointer and pass the memory address.
+
+    func jumpOnTable(t *Table){}
+    ...
+    jumpOnTable(&tbl)
+
+* Pointer, addresses, receivers (2/2)
+
+Same case for struct's methods:
+
+    func (p Person) Name() {} // "value receiver"
+
+    func (p *Person) ChangeName() {} // "pointer receiver"
+
+*Task*#5*
+
+    go test github.com/slomek/go-workshops/tasks/task5/bday
+
+
+* goroutines
+
+If you want to call `method()` asynchronously, just type:
+
+    go method()
+
+But what about communication between goroutines?
+
+- sync.WaitGroup
+- channels
+
+Much more details on:
+.link https://github.com/gowroc/meetups/tree/master/go-concurrency go-concurrency@Go Meetups Wrocław (by M.Dymiński)
+
+* sync.WaitGroup
+
+We can wait for each goroutine to finish. Three elements are necessary:
+
+- create wait group and declare number of goroutines we are wating for
+    wg := sync.WaitGroup{}
+    wg.Add(27) // increment WaitGroup
+
+- notify finished job after each goroutine
+    wg.Done()
+
+- start waiting (always after goroutine calls!)
+    wg.Wait()
+
+*Task*#6*
+
+    go run tasks/task6/main.go
+
+* channels
+
+Best (?) way to have goroutines talk to each other.
+
+Creating a channel:
+
+    mychannel1 := make(chan string)
+    mychannel2 := make(chan string, 2)
+
+Putting stuff into it:
+
+    mychannel1 <- "going it"
+
+Taking stuff out of it:
+
+    message := <- mychannel1
+
+*Task*#7a*
+
+    go test github.com/slomek/go-workshops/tasks/task7/unbuff
+
+* channels use case: select
+
+Sometimes we listen to more than one thing and want to execute action on first event (eg. timeout handling).
+
+    select {
+    case <- channel1:
+        // do stuff if message comes from this channel
+    case <- channel2:
+        // of from this one
+    case <= time.After(time.Hour):
+        // if it takes an hour, it's not worth it
+    }
+
+*Task*#7b*
+
+    go test github.com/slomek/go-workshops/tasks/task7/sel
+
+* Recommended reading
+
+- Go In Action
+
+.image go-workshops/goinaction.jpg 450 _

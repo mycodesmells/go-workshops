@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-//	"sync"
+	//	"sync"
 
 	"github.com/slomek/go-workshops/tasks/task6/dogs"
 )
