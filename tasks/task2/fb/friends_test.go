@@ -7,7 +7,7 @@ import (
 )
 
 func TestNumberOfFriends(t *testing.T) {
-	expected := 0
+	expected := 1
 	n := fb.NumberOfFriends()
 
 	if n != expected {

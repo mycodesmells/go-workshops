@@ -1,15 +1,20 @@
 package fb
+import "fmt"
 
 type Person struct {
 	Name string
 	Location string
 }
 
-type NaivePerson interface {
-	LikesMe() bool
-	ForceLikeMe()
+type Friend interface {
+	TellSecret() string
 }
 
-func (np NaivePerson) LikesMe() {
-	return np.ableToLike
+func TalkToFriend(f Friend) string {
+	s := f.TellSecret()
+
+	fmt.Println(" - What is the secret, dude?")
+	fmt.Printf(" - %s\n", s)
+
+	return s
 }
