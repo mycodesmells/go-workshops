@@ -23,12 +23,12 @@ Three environmental variables:
 
     $GOROOT -> /usr/local/go
     $PATH   -> $GOROOT/bin:$PATH
-    $GOPATH -> /home/pslomka/go
-    $GOBIN  -> /home/pslomka/go/bin
+    $GOPATH -> $HOME
+    $GOBIN  -> $HOME/bin
 
 *Task*#1*
 
-    go run tasks/workshop1/main.go
+    go run tasks/tasks1/main.go
     go get -u github.com/golang/lint/golint
     go install github.com/slomek/go-workshops/tasks/task1
 
@@ -64,7 +64,7 @@ Note that you can only import things starting with a capital letter!
 
 *Task*#2*
 
-    go test github.com/slomek/go-workshops/tasks/task2/fb
+    go test github.com/slomek/go-workshops/tasks/task2/wall
 
 We want to see the number of friends we have.
 

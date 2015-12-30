@@ -11,7 +11,7 @@
 * *Task #2*: Importing between modules: 
 
     ```
-    go test github.com/slomek/go-workshops/tasks/task2/fb
+    go test github.com/slomek/go-workshops/tasks/task2/wall
     ```
     
 * *Task #3*: Creating structs: 

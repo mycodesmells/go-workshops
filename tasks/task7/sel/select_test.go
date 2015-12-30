@@ -1,18 +1,16 @@
-package sel_test
+package sel
 
 import (
 	"testing"
 
 	"fmt"
-
-	"."
 )
 
 func TestWaitForToiletSuccess(t *testing.T) {
 	toiletFree := make(chan bool)
 	bladder := make(chan string)
 
-	go sel.WaitForToilet(toiletFree, bladder)
+	go WaitForToilet(toiletFree, bladder)
 	toiletFree <- true
 
 	state := <-bladder
@@ -26,7 +24,7 @@ func TestWaitForToiletFailure(t *testing.T) {
 	toiletFree := make(chan bool)
 	bladder := make(chan string)
 
-	go sel.WaitForToilet(toiletFree, bladder)
+	go WaitForToilet(toiletFree, bladder)
 
 	state := <-bladder
 	fmt.Println(state)

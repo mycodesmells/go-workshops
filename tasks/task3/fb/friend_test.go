@@ -1,13 +1,11 @@
-package fb_test
+package fb
 
 import (
 	"testing"
-
-	"."
 )
 
 func TestCreateImaginaryFriend(t *testing.T) {
-	f := fb.Friend{}
+	f := Friend{}
 
 	if f.Name != "Johny Bravo" {
 		t.Errorf("I expected you to be friends with Johny Bravo, but you hang out with '%s' instead!", f.Name)

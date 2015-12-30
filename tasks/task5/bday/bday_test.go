@@ -1,13 +1,11 @@
-package bday_test
+package bday
 
 import (
 	"testing"
-
-	"."
 )
 
 func TestFriendGettingOlder(t *testing.T) {
-	ff := bday.FakeFriend{Age: 77}
+	ff := FakeFriend{Age: 77}
 	ff.HappyBirthday()
 
 	if ff.Age != 78 {

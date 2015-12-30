@@ -1,4 +1,4 @@
-package unbuff_test
+package unbuff
 
 import (
 	"testing"
