@@ -209,7 +209,7 @@ Sometimes we listen to more than one thing and want to execute action on first e
         // do stuff if message comes from this channel
     case <- channel2:
         // of from this one
-    case <= time.After(time.Hour):
+    case <- time.After(time.Hour):
         // if it takes an hour, it's not worth it
     }
 
